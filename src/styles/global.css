@@ -292,20 +292,9 @@ p:last-child {
   border-top: 3px solid var(--accent);
 }
 
-.card-grid--three .card {
-  break-inside: avoid;
-}
-
-@media (min-width: 600px) {
-  .card-grid--three {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (min-width: 1000px) {
-  .card-grid--three {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+.card-grid--three {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-content: center;
 }
 
 /* ---- Cards (Projects) ---- */
