@@ -1,0 +1,27 @@
+---
+// ============================================================
+// BUTTON — Renders as <a> or <button>
+// ============================================================
+export interface Props {
+  href?: string;
+  download?: string;
+  target?: string;
+  variant?: "default" | "primary" | "secondary";
+}
+
+const { href, download, target, variant = "default" } = Astro.props;
+
+const className = `btn btn--${variant}`;
+---
+
+{
+  href ? (
+    <a href={href} class={className} {download} {target}>
+      <slot />
+    </a>
+  ) : (
+    <button class={className}>
+      <slot />
+    </button>
+  )
+}

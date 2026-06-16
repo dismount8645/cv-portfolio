@@ -1,0 +1,107 @@
+---
+import Layout from "../components/Layout.astro";
+import Section from "../components/Section.astro";
+import Button from "../components/Button.astro";
+import { cv } from "../data/cv.js";
+import { site } from "../data/site.js";
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Layout title="CV" description="Curriculum Vitae" activePage="cv">
+  <!-- Education -->
+  <Section title="Education">
+    {cv.education.map((entry) => (
+      <div class="entry">
+        <div class="entry__header">
+          <h3 class="entry__title">{entry.degree}</h3>
+          <span class="entry__meta">{entry.period}</span>
+        </div>
+        <div class="entry__sub">
+          {entry.school}, {entry.location}
+        </div>
+        {entry.details && <p class="entry__details">{entry.details}</p>}
+      </div>
+    ))}
+  </Section>
+
+  <!-- Experience -->
+  <Section title="Work Experience">
+    {cv.experience.map((entry) => (
+      <div class="entry">
+        <div class="entry__header">
+          <h3 class="entry__title">{entry.role}</h3>
+          <span class="entry__meta">{entry.period}</span>
+        </div>
+        <div class="entry__sub">{entry.company}, {entry.location}</div>
+        <ul class="entry__list">
+          {entry.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </Section>
+
+  <!-- Skills -->
+  <Section title="Skills">
+    {cv.skills.map((group) => (
+      <div class="tag-group">
+        <div class="tag-group__label">{group.category}</div>
+        <div class="tag-group__tags">
+          {group.items.map((item) => (
+            <span class="tag">{item}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </Section>
+
+  <!-- Tools -->
+  <Section title="Tools & Technologies">
+    {cv.tools.map((group) => (
+      <div class="tag-group">
+        <div class="tag-group__label">{group.category}</div>
+        <div class="tag-group__tags">
+          {group.items.map((item) => (
+            <span class="tag">{item}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </Section>
+
+  <!-- Certifications -->
+  {cv.certifications.length > 0 && (
+    <Section title="Certifications">
+      {cv.certifications.map((cert) => (
+        <div class="entry">
+          <div class="entry__header">
+            <h3 class="entry__title">{cert.name}</h3>
+            <span class="entry__meta">{cert.year}</span>
+          </div>
+          {cert.issuer && <div class="entry__sub">{cert.issuer}</div>}
+        </div>
+      ))}
+    </Section>
+  )}
+
+  <!-- Languages -->
+  <Section title="Languages">
+    {cv.languages.map((lang) => (
+      <div class="entry">
+        <div class="entry__header">
+          <h3 class="entry__title">{lang.language}</h3>
+          <span class="entry__meta">{lang.level}</span>
+        </div>
+      </div>
+    ))}
+  </Section>
+
+  <!-- Download -->
+  <Section>
+    <Button href={`${base}cv.pdf`} download variant="primary">
+      Download CV as PDF
+    </Button>
+  </Section>
+</Layout>

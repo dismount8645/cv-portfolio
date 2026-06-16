@@ -1,0 +1,23 @@
+---
+import Layout from "../components/Layout.astro";
+import Section from "../components/Section.astro";
+import { site } from "../data/site.js";
+---
+
+<Layout title="About" description="About me" activePage="about">
+  <Section title="About Me">
+    <p>{site.about.profile}</p>
+  </Section>
+
+  <Section title="Academic Interests">
+    <ul class="entry__list">
+      {site.about.interests.map((interest) => (
+        <li>{interest}</li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section title="Career Direction">
+    <p>{site.about.career}</p>
+  </Section>
+</Layout>

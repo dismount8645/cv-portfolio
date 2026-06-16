@@ -1,0 +1,30 @@
+---
+import Layout from "../components/Layout.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import { projects } from "../data/projects.js";
+---
+
+<Layout title="Projects" description="Study and portfolio projects" activePage="projects">
+  <Section>
+    <div class="container container--wide">
+      <h2 class="section__title">Projects</h2>
+      {projects.length > 0 ? (
+        <div class="card-grid">
+          {projects.map((project) => (
+            <Card
+              title={project.title}
+              description={project.description}
+              role={project.role}
+              period={project.period}
+              technologies={project.technologies}
+              links={project.links}
+            />
+          ))}
+        </div>
+      ) : (
+        <p>Projects coming soon.</p>
+      )}
+    </div>
+  </Section>
+</Layout>

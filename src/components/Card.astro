@@ -1,0 +1,41 @@
+---
+// ============================================================
+// CARD — Project card
+// ============================================================
+export interface Props {
+  title: string;
+  description: string;
+  role: string;
+  period: string;
+  technologies: string[];
+  links: Record<string, string>;
+}
+
+const { title, description, role, period, technologies, links } = Astro.props;
+
+const linkLabels: Record<string, string> = {
+  github: "GitHub",
+  report: "Report",
+  demo: "Demo",
+};
+---
+
+<article class="card">
+  <h3 class="card__title">{title}</h3>
+  <div class="card__meta">{role} &middot; {period}</div>
+  <p class="card__description">{description}</p>
+
+  <div class="card__tags">
+    {technologies.map((tech) => (
+      <span class="tag">{tech}</span>
+    ))}
+  </div>
+
+  <div class="card__links">
+    {Object.entries(links).map(([key, url]) => (
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        {linkLabels[key] || key}
+      </a>
+    ))}
+  </div>
+</article>

@@ -1,0 +1,18 @@
+---
+// ============================================================
+// SECTION — Wrapper with optional title
+// ============================================================
+export interface Props {
+  title?: string;
+  id?: string;
+}
+
+const { title, id } = Astro.props;
+---
+
+<section class="section" {id}>
+  <div class="container">
+    {title && <h2 class="section__title">{title}</h2>}
+    <slot />
+  </div>
+</section>

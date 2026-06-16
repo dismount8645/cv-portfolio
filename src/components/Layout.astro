@@ -1,0 +1,52 @@
+---
+// ============================================================
+// LAYOUT — Nav header, main content, footer
+// ============================================================
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site.js";
+
+export interface Props {
+  title: string;
+  description?: string;
+  activePage?: "home" | "cv" | "projects" | "about" | "contact";
+}
+
+const { title, description, activePage } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const navLinks = [
+  { href: `${base}`, label: "Home", key: "home" },
+  { href: `${base}cv`, label: "CV", key: "cv" },
+  { href: `${base}projects`, label: "Projects", key: "projects" },
+  { href: `${base}about`, label: "About", key: "about" },
+  { href: `${base}contact`, label: "Contact", key: "contact" },
+];
+---
+
+<BaseLayout {title} {description}>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__name">{site.name}</a>
+      <div class="nav__links">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={["nav__link", { "nav__link--active": link.key === activePage }]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      &copy; {new Date().getFullYear()} {site.name}
+    </div>
+  </footer>
+</BaseLayout>
