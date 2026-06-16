@@ -1,9 +1,31 @@
 ---
 import Layout from "../components/Layout.astro";
+import Section from "../components/Section.astro";
 import Button from "../components/Button.astro";
 import { site } from "../data/site.js";
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const focusAreas = [
+  {
+    title: "Software Engineering",
+    description:
+      "Writing clean, maintainable code. Designing modular architectures, establishing testing practices, and building developer tooling that teams enjoy using.",
+    icon: "code",
+  },
+  {
+    title: "Distributed Systems",
+    description:
+      "Consensus protocols, fault-tolerant design, scalable cloud infrastructure, and edge computing. Turning research ideas into working systems.",
+    icon: "network",
+  },
+  {
+    title: "Applied Projects",
+    description:
+      "End-to-end delivery from idea to deployment. Collaborating across teams, bridging research and production, and building things that work in practice.",
+    icon: "briefcase",
+  },
+];
 ---
 
 <Layout title="Home" description={site.headline} activePage="home">
@@ -22,4 +44,38 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       </div>
     </section>
   </div>
+
+  <Section title="Focus Areas">
+    <div class="card-grid card-grid--three">
+      {focusAreas.map((area) => (
+        <div class="card card--focus">
+          <div class="card__icon">
+            {area.icon === "code" && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            )}
+            {area.icon === "network" && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="8" height="8" rx="2" />
+                <rect x="14" y="2" width="8" height="8" rx="2" />
+                <rect x="8" y="14" width="8" height="8" rx="2" />
+                <line x1="6" y1="6" x2="14" y2="6" />
+                <line x1="16" y1="16" x2="16" y2="10" />
+              </svg>
+            )}
+            {area.icon === "briefcase" && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+            )}
+          </div>
+          <h3 class="card__title">{area.title}</h3>
+          <p class="card__description">{area.description}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
 </Layout>

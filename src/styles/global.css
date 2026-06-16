@@ -275,6 +275,39 @@ p:last-child {
   color: var(--fg);
 }
 
+/* ---- Focus Cards (Home) ---- */
+.card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: var(--space-sm);
+  color: var(--accent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.card--focus {
+  border-top: 3px solid var(--accent);
+}
+
+.card-grid--three .card {
+  break-inside: avoid;
+}
+
+@media (min-width: 600px) {
+  .card-grid--three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1000px) {
+  .card-grid--three {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 /* ---- Cards (Projects) ---- */
 .card-grid {
   display: grid;
