@@ -293,8 +293,29 @@ p:last-child {
 }
 
 .card-grid--three {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  justify-content: center;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .card-grid--three {
+    grid-template-columns: 1fr 1fr;
+  }
+  .card-grid--three > .card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .card-grid--three {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .card-grid--three > .card:nth-child(3) {
+    grid-column: auto;
+    justify-self: auto;
+    max-width: none;
+  }
 }
 
 /* ---- Cards (Projects) ---- */
